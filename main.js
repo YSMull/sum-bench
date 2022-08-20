@@ -1,7 +1,16 @@
-let a = 0;
-console.time('sum')
-for (let i = 0; i < 10000000; i++) {
-    a += i;
+let perform = function (n) {
+    let s = 0;
+    for (let i = 0; i < n; i++) {
+        s += i;
+    }
+    return s
 }
-console.log(a);
-console.timeEnd('sum')
+
+let inputs = '10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001'.split('\n');
+for (let i = 0; i < inputs.length; i++) {
+    let n = Number.parseInt(inputs[i]);
+    console.time('sum')
+    let result = perform(n)
+    console.timeEnd('sum')
+    console.log(result);
+}

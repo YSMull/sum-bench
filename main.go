@@ -1,13 +1,28 @@
 package main
 
-import "time"
+import (
+	"strconv"
+	"strings"
+	"time"
+)
 
-func main() {
-	start := time.Now()
-	var sum = 0
-	for i := 1; i <= 10000000; i++ {
+func perform(n int) int {
+	sum := 0
+	for i := 0; i < n; i++ {
 		sum += i
 	}
-	duration := time.Since(start)
-	println(duration.Milliseconds())
+	return sum
+}
+
+func main() {
+	s := "10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001"
+	m := strings.Split(s, "\n")
+
+	for i := 0; i < len(m); i++ {
+		n, _ := strconv.Atoi(m[i])
+		start := time.Now()
+		result := perform(n)
+		duration := time.Since(start)
+		println(result, duration.Nanoseconds())
+	}
 }

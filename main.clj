@@ -1,27 +1,15 @@
-(ns json-parser-clj.main)
+(ns sum.core
+  (:gen-class))
 
-; 加这个 type hint 性能提高一倍
-(defn ^long perform []
+(defn ^long perform [n]
   (loop [s 0
          i 1]
-    (if (< i 10000001)
+    (if (< i n)
       (recur (+ s i) (inc i))
       s)))
 
 (defn -main []
-  (do
-    (println (perform))
-    (time (perform))
-    (time (perform))
-    (time (perform))
-    (time (perform))
-    (time (perform))
-    (time (perform))
-    (time (perform))
-    (time (perform))
-    (time (perform))
-    (time (perform))
-    (time (perform))
-    (time (perform))
-    (time (perform))
+  (let [nums (map #(Integer/parseInt %) (clojure.string/split-lines "10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n10000001\n"))]
+    (doall (for [n nums]
+      (time (perform n))))
     ))

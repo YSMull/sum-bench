@@ -2,50 +2,28 @@ object Main {
 
   def time[R](block: => R): R = {
     val t0 = System.nanoTime()
-    val result = block // call-by-name
+    val result = block
     val t1 = System.nanoTime()
-    println("Elapsed time: " + (t1 - t0) / 1000000 + "ms")
+    println("Elapsed time: " + (t1 - t0) / 1000000.0 + "ms")
     result
   }
 
-  def perform(): Unit = {
-    var a = 0L
-    for (i <- 1 to 10000000) {
-      a += i
+  def perform(n: Int): Long = {
+    var s = 0L
+    for (i <- 1 to n) {
+      s += i
     }
-    println(a)
+    println(s)
+    s
   }
 
   def main(args: Array[String]): Unit = {
-    time {
-      perform()
-    }
-    time {
-      perform()
-    }
-    time {
-      perform()
-    }
-    time {
-      perform()
-    }
-    time {
-      perform()
-    }
-    time {
-      perform()
-    }
-    time {
-      perform()
-    }
-    time {
-      perform()
-    }
-    time {
-      perform()
-    }
-    time {
-      perform()
+    val inputs = "10000000\n10000000\n10000000\n10000000\n10000000\n10000000\n10000000\n10000000\n10000000\n10000000\n10000000\n10000000"
+    val numbers = inputs.split("\n").map(Integer.parseInt)
+    for (n <- numbers) {
+      time {
+        perform(n)
+      }
     }
   }
 }
